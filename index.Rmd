@@ -1,0 +1,47 @@
+---
+title       : R crash course
+framework   : revealjs
+highlighter : html5slides   # {io2012, html5slides, shower, dzslides, ...}
+hitheme     : default 
+widgets     : []
+mode        : selfcontained
+knit        : slidify::knit2slides
+---
+
+
+## Developing Data Products Course Project
+
+Santiago Paz, June 2015
+
+---
+
+## Introduction
+
+This project takes a glance at hospitals from all US states
+and gives the worst or best ranked hospital from each state according
+to three different medical issues
+
+1. Heart Attacks 
+2. Heart Failure
+3. Pneumonia
+
+---
+
+The app can be found 
+[here](https://www.shinyapps.io/admin/#/application/47905)
+
+Code for the app can be found 
+[here](http://github.com/pantisaz/developing-data-products)
+
+---
+The data for the project was obtained from 
+[here](https://data.medicare.gov/data/hospital-compare)
+
+---
+## Some Data
+
+```{r}
+bigdata<-read.csv("outcome-of-care-measures.csv", colClasses = "character", na.string = "Not Available")
+
+head(bigdata)
+```

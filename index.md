@@ -1,64 +1,54 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>R crash course</title>
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/reveal.min.css">
-  <link rel="stylesheet" href="libraries/frameworks/revealjs/css/theme/default.css" id="theme">
-  <link rel="stylesheet" href="libraries/highlighters/html5slides/css/default.css" id="theme">
-  <!--[if lt IE 9]>
-  <script src="lib/js/html5shiv.js"></script>
-  <![endif]-->  <link rel="stylesheet" href = "assets/css/ribbons.css">
+---
+title       : R crash course
+framework   : revealjs
+highlighter : html5slides   # {io2012, html5slides, shower, dzslides, ...}
+hitheme     : default 
+widgets     : []
+mode        : selfcontained
+knit        : slidify::knit2slides
+---
 
-</head>
-<body>
-  <div class="reveal">
-    <div class="slides">
-      <section class='' data-state='' id='slide-1'>
-  <h2>Developing Data Products Course Project</h2>
-  <p>Santiago Paz, June 2015</p>
 
-</section>
-<section class='' data-state='' id='slide-2'>
-  <h2>Introduction</h2>
-  <p>This project takes a glance at hospitals from all US states
+## Developing Data Products Course Project
+
+Santiago Paz, June 2015
+
+---
+
+## Introduction
+
+This project takes a glance at hospitals from all US states
 and gives the worst or best ranked hospital from each state according
-to three different medical issues</p>
+to three different medical issues
 
-<ol>
-<li>Heart Attacks </li>
-<li>Heart Failure</li>
-<li>Pneumonia</li>
-</ol>
+1. Heart Attacks 
+2. Heart Failure
+3. Pneumonia
 
-</section>
-<section class='' data-state='' id='slide-3'>
-  
-  <p>The app can be found 
-<a href="https://www.shinyapps.io/admin/#/application/47905">here</a></p>
+---
 
-<p>Code for the app can be found 
-<a href="http://github.com/pantisaz/developing-data-products">here</a></p>
+The app can be found 
+[here](https://www.shinyapps.io/admin/#/application/47905)
 
-</section>
-<section class='' data-state='' id='slide-4'>
-  
-  <p>The data for the project was obtained from 
-<a href="https://data.medicare.gov/data/hospital-compare">here</a></p>
+Code for the app can be found 
+[here](http://github.com/pantisaz/developing-data-products)
 
-</section>
-<section class='' data-state='' id='slide-5'>
-  <h2>Some Data</h2>
-  <pre><code class="r">bigdata&lt;-read.csv(&quot;outcome-of-care-measures.csv&quot;, colClasses = &quot;character&quot;, na.string = &quot;Not Available&quot;)
+---
+The data for the project was obtained from 
+[here](https://data.medicare.gov/data/hospital-compare)
+
+---
+## Some Data
+
+
+```r
+bigdata<-read.csv("outcome-of-care-measures.csv", colClasses = "character", na.string = "Not Available")
 
 head(bigdata)
-</code></pre>
+```
 
-<pre><code>##   Provider.Number                    Hospital.Name
+```
+##   Provider.Number                    Hospital.Name
 ## 1          010001 SOUTHEAST ALABAMA MEDICAL CENTER
 ## 2          010005    MARSHALL MEDICAL CENTER SOUTH
 ## 3          010006   ELIZA COFFEE MEMORIAL HOSPITAL
@@ -83,9 +73,9 @@ head(bigdata)
 ## 1                                                      14.3
 ## 2                                                      18.5
 ## 3                                                      18.1
-## 4                                                      &lt;NA&gt;
-## 5                                                      &lt;NA&gt;
-## 6                                                      &lt;NA&gt;
+## 4                                                      <NA>
+## 5                                                      <NA>
+## 6                                                      <NA>
 ##   Comparison.to.U.S..Rate...Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack
 ## 1                                                No Different than U.S. National Rate
 ## 2                                                No Different than U.S. National Rate
@@ -97,16 +87,16 @@ head(bigdata)
 ## 1                                                                                 12.1
 ## 2                                                                                 14.7
 ## 3                                                                                 14.8
-## 4                                                                                 &lt;NA&gt;
-## 5                                                                                 &lt;NA&gt;
-## 6                                                                                 &lt;NA&gt;
+## 4                                                                                 <NA>
+## 5                                                                                 <NA>
+## 6                                                                                 <NA>
 ##   Upper.Mortality.Estimate...Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack
 ## 1                                                                                 17.0
 ## 2                                                                                 23.0
 ## 3                                                                                 21.8
-## 4                                                                                 &lt;NA&gt;
-## 5                                                                                 &lt;NA&gt;
-## 6                                                                                 &lt;NA&gt;
+## 4                                                                                 <NA>
+## 5                                                                                 <NA>
+## 6                                                                                 <NA>
 ##   Number.of.Patients...Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack
 ## 1                                                                            666
 ## 2                                                                             44
@@ -207,11 +197,11 @@ head(bigdata)
 ## 6                                                                  
 ##   Hospital.30.Day.Readmission.Rates.from.Heart.Attack
 ## 1                                                19.0
-## 2                                                &lt;NA&gt;
+## 2                                                <NA>
 ## 3                                                17.8
-## 4                                                &lt;NA&gt;
-## 5                                                &lt;NA&gt;
-## 6                                                &lt;NA&gt;
+## 4                                                <NA>
+## 5                                                <NA>
+## 6                                                <NA>
 ##   Comparison.to.U.S..Rate...Hospital.30.Day.Readmission.Rates.from.Heart.Attack
 ## 1                                          No Different than U.S. National Rate
 ## 2                                                     Number of Cases Too Small
@@ -221,18 +211,18 @@ head(bigdata)
 ## 6                                                     Number of Cases Too Small
 ##   Lower.Readmission.Estimate...Hospital.30.Day.Readmission.Rates.from.Heart.Attack
 ## 1                                                                             16.6
-## 2                                                                             &lt;NA&gt;
+## 2                                                                             <NA>
 ## 3                                                                             14.9
-## 4                                                                             &lt;NA&gt;
-## 5                                                                             &lt;NA&gt;
-## 6                                                                             &lt;NA&gt;
+## 4                                                                             <NA>
+## 5                                                                             <NA>
+## 6                                                                             <NA>
 ##   Upper.Readmission.Estimate...Hospital.30.Day.Readmission.Rates.from.Heart.Attack
 ## 1                                                                             21.7
-## 2                                                                             &lt;NA&gt;
+## 2                                                                             <NA>
 ## 3                                                                             21.5
-## 4                                                                             &lt;NA&gt;
-## 5                                                                             &lt;NA&gt;
-## 6                                                                             &lt;NA&gt;
+## 4                                                                             <NA>
+## 5                                                                             <NA>
+## 6                                                                             <NA>
 ##   Number.of.Patients...Hospital.30.Day.Readmission.Rates.from.Heart.Attack
 ## 1                                                                      728
 ## 2                                                                       21
@@ -331,36 +321,4 @@ head(bigdata)
 ## 4                                                            
 ## 5                                                            
 ## 6
-</code></pre>
-
-</section>
-    </div>
-  </div>
-</body>
-  <script src="libraries/frameworks/revealjs/lib/js/head.min.js"></script>
-  <script src="libraries/frameworks/revealjs/js/reveal.min.js"></script>
-  <script>
-  // Full list of configuration options available here:
-  // https://github.com/hakimel/reveal.js#configuration
-  Reveal.initialize({
-    controls: true,
-    progress: true,
-    history: true,
-    center: true,
-    theme: Reveal.getQueryHash().theme || 'default', 
-    transition: Reveal.getQueryHash().transition || 'default', 
-    dependencies: [
-    // Cross-browser shim that fully implements classList -
-    // https://github.com/eligrey/classList.js/
-      { src: 'libraries/frameworks/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList;}},
-      // Zoom in and out with Alt+click
-      { src: 'libraries/frameworks/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-      // Speaker notes
-      { src: 'libraries/frameworks/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
-      // Remote control your reveal.js presentation using a touch device
-      //{ src: 'libraries/frameworks/revealjs/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-      ]
-  });
-  </script>   
-
-</html>
+```
